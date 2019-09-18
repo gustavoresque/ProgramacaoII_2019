@@ -18,8 +18,9 @@ public class Espadachim extends Personagem{
     
     @Override
     public void treinar() {
-        forca+=5;
+        forca+=level*2;
         inteligencia++;
+        max_hp+= level*21;
     }
 
     @Override

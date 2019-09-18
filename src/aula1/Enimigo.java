@@ -9,24 +9,22 @@ package aula1;
  *
  * @author Gustavo
  */
-public class Mago extends Personagem{
+public class Enimigo extends Personagem{
 
-    public Mago(String apelido) {
-        super(apelido);
+    public Enimigo(String nome, int level) {
+        super();
+        this.forca = level*2;
+        this.hp = level*20+100;
     }
-    
     
 
     @Override
-    public void treinar() {
-        inteligencia+= level*3;
-        forca++;
-        this.max_hp += level*19;
+    public void treinar() {        
     }
 
     @Override
     public void ataque(Personagem p) {
-        p.hp-=this.inteligencia;
+        p.hp-=this.forca;
     }
     
 }

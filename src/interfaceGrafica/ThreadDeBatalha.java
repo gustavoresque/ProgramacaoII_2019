@@ -5,6 +5,7 @@
  */
 package interfaceGrafica;
 
+import aula1.Enimigo;
 import aula1.Personagem;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,17 @@ public class ThreadDeBatalha extends Thread{
 
     public ThreadDeBatalha(Personagem personagem) {
         this.personagem = personagem;
-        this.listener = () -> {
+        this.listener = new BattleActionListener() {
+
+            @Override
+            public void battleEnd() {
+                
+            }
+
+            @Override
+            public void roundEnd(Personagem p, Personagem en) {
+                
+            }
         };
     }
     
@@ -31,10 +42,24 @@ public class ThreadDeBatalha extends Thread{
     public void run() {
         while (true) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
             } catch (InterruptedException ex) {
             }
-            this.personagem.treinar();
+            Enimigo en = new Enimigo("Dragão", 1);
+            while(en.getHp() > 0 && personagem.getHp() > 0){
+                en.ataque(personagem);
+                personagem.ataque(en);
+                listener.roundEnd(personagem, en);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                }
+            }
+            if(personagem.getHp() > 0){
+                this.personagem.treinar();
+            }
+            personagem.restaurarHP();
+            
             System.out.println("Thread Batalha: "+(cont++));
             listener.battleEnd();
         }
@@ -49,6 +74,7 @@ public class ThreadDeBatalha extends Thread{
     
     public static interface BattleActionListener {
         public void battleEnd();
+        public void roundEnd(Personagem p, Personagem en);
     }
     
 }

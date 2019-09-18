@@ -15,6 +15,8 @@ public abstract class Personagem {
     protected int hp;
     protected int forca;
     protected int inteligencia;
+    protected int max_hp;
+    protected int level;
 
     /**
      * Classe utilizada para definição das propriedades e metodos de personagens do jogo.
@@ -23,7 +25,9 @@ public abstract class Personagem {
     public Personagem(String apelido) {
         this.apelido = apelido;
         this.hp = 100;
+        this.max_hp = 100;
         this.forca = 10;
+        this.level = 1;
     }
     public Personagem() {
         this("Sem nome");
@@ -60,6 +64,10 @@ public abstract class Personagem {
 
     public int getInteligencia() {
         return inteligencia;
+    }
+    
+    public void restaurarHP(){
+        this.hp = this.max_hp;
     }
     
 }

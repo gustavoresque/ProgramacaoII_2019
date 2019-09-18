@@ -35,6 +35,15 @@ public class JanelaPrincipal extends JFrame {
                 labelInteligencia
                     .setText("Inteligência: "+p.getInteligencia());
             }
+
+            @Override
+            public void roundEnd(Personagem p, Personagem en) {
+                tAreaLog.setText(p.getApelido()+" tem "
+                        +p.getHp()+ " de HP e o enimo "+
+                        en.getApelido()+" tem "+ 
+                        en.getHp()+" de HP.\n"+
+                        tAreaLog.getText());
+            }
         });
         tb.start();
 //        p.apelido = "alo";
@@ -55,21 +64,33 @@ public class JanelaPrincipal extends JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tAreaLog = new javax.swing.JTextArea();
         labelApelido = new javax.swing.JLabel();
         labelForca = new javax.swing.JLabel();
         labelInteligencia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tAreaLog.setEditable(false);
+        tAreaLog.setColumns(20);
+        tAreaLog.setRows(5);
+        jScrollPane1.setViewportView(tAreaLog);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 342, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 162, Short.MAX_VALUE))
         );
 
         labelApelido.setText("jLabel1");
@@ -161,8 +182,10 @@ public class JanelaPrincipal extends JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelApelido;
     private javax.swing.JLabel labelForca;
     private javax.swing.JLabel labelInteligencia;
+    private javax.swing.JTextArea tAreaLog;
     // End of variables declaration//GEN-END:variables
 }
